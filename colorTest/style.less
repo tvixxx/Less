@@ -1,4 +1,5 @@
-/* Common */
+/* First method - Common */
+
 @base-color: rgb(110, 27, 255); // например, сменив первое значение, поменяется весь color-ряд ниже
 
 @distance: 60;
@@ -29,5 +30,29 @@
     display: inline-block;
     .color {
         margin: 0 .5em;
+    }
+}
+
+/* Second method - Desaturate and Saturate */
+@base-color: rgb(110, 27, 255);
+@alter-color: spin(@base-color, 60);
+
+.btn {
+    &-primary {
+        background-color: @base-color;
+        
+        &-hover, &:hover {
+            background-color: lighten(@base-color, 20%);
+        }
+        
+        &-pressed, &:active {
+            background-color: darken(@base-color, 20%);
+        }
+        
+        /* &-правило добавьте тут */
+        &-disabled {
+            color: rgba(255, 255, 255, 0.8); 
+            background-color: desaturate(lighten(@base-color, 20%), 70%);
+        }
     }
 }
